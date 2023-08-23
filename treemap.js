@@ -20,7 +20,7 @@ const TREE_o
 
 
 
-, getMaximum__n:
+, max__n:
   number_a =>
     Math
       .max
@@ -30,7 +30,7 @@ const TREE_o
 
 
 
-, getMinimum__n:
+, min__n:
   number_a =>
     Math
       .min
@@ -40,7 +40,7 @@ const TREE_o
 
 
 
-, sumReducer__n:
+, sum__n:
   (
     sum_n
   , at_n
@@ -51,7 +51,7 @@ const TREE_o
 
 
 
-, roundValue__n:
+, round__n:
     number_n =>
       Math
         .max
@@ -70,7 +70,7 @@ const TREE_o
 
 
 
-, worstRatio__n
+, ratio__n
   (
     row_a
   , width_n
@@ -81,16 +81,20 @@ const TREE_o
       row_a
         .reduce
         (
-          sumReducer__n
+          TREE_o
+            .sum__n
         , 0
         )
 
     const rowMax_n
     =
-      getMaximum__n( row_a )
+      TREE_o
+        .max__n( row_a )
 
     const rowMin_n
-    = getMinimum__n( row_a )
+    =
+      TREE_o
+        .min__n( row_a )
 
     return (
       Math
@@ -132,7 +136,7 @@ const TREE_o
 
 
 
-, getMin__o
+, min__o
   ()
   {
     if
@@ -161,7 +165,7 @@ const TREE_o
         }
       )
     }
-    
+
     return (
       {
         dim_n:
@@ -176,7 +180,7 @@ const TREE_o
 
 
 
-, layoutRow__v
+, row__v
   (
     row_a
   , width_n
@@ -188,7 +192,8 @@ const TREE_o
       row_a
         .reduce
         (
-          sumReducer__n
+          TREE_o
+            .sum__n
         , 0
         )
       /
@@ -335,7 +340,7 @@ const TREE_o
 
 
 
-, layoutLastRow__v
+, lastRow__v
   (
     row_a
   , children_a
@@ -344,21 +349,24 @@ const TREE_o
   {
     const { vertical_b }
     =
-      getMin__o()
+      TREE_o
+        .min__o()
 
-    layoutRow__v
-    (
-      row_a
-    , width_n
-    , vertical_b
-    )
-
-    layoutRow__v
-    (
-      children_a
+    TREE_o
+      .row__v
+      (
+        row_a
       , width_n
       , vertical_b
-    )
+      )
+
+    TREE_o
+      .row__v
+      (
+        children_a
+        , width_n
+        , vertical_b
+      )
   }
 
 
@@ -379,12 +387,13 @@ const TREE_o
     )
     {
       return void (
-        layoutLastRow__v
-        (
-          row_a
-        , children_a
-        , width_n
-        )
+        TREE_o
+          .lastRow__v
+          (
+            row_a
+          , children_a
+          , width_n
+          )
       )
     }
 
@@ -402,48 +411,55 @@ const TREE_o
       ===
       0
       ||
-      worstRatio__n
-      (
-        row_a
-      , width_n
-      )
+      TREE_o
+        .ratio__n
+        (
+          row_a
+        , width_n
+        )
       >=
-      worstRatio__n
-      (
-        rowWithChild_a
-      , width_n
-      )
+      TREE_o
+        .ratio__n
+        (
+          rowWithChild_a
+        , width_n
+        )
     )
     {
       children_a
         .shift()
 
       return void (
-        squarify__v
-        (
-          children_a
-        , rowWithChild_a
-        , width_n
-        )
+        TREE_o
+          .squarify__v
+          (
+            children_a
+          , rowWithChild_a
+          , width_n
+          )
       )
     }
 
-    layoutRow__v
-    (
-      row_a
-    , width_n
-    , getMin__o()
-        .vertical_b
-    )
+    TREE_o
+      .row__v
+      (
+        row_a
+      , width_n
+      , TREE_o
+          .min__o()
+            .vertical_b
+      )
 
     return (
-      squarify__v
-      (
-        children_a
-      , []
-      , getMin__o()
-          .dim_n
-      )
+      TREE_o
+        .squarify__v
+        (
+          children_a
+        , []
+        , TREE_o
+            .min__o()
+              .dim_n
+        )
     )
   }
 
@@ -482,13 +498,14 @@ const TREE_o
       data_a
         .map
         (
-          dataPoint =>
-            dataPoint
+          at_a =>
+            at_a
               .dim_n
         )
           .reduce
             (
-              sumReducer__n
+              TREE_o
+                .sum__n
             , 0
             )
 
@@ -497,9 +514,9 @@ const TREE_o
       data_a
         .map
         (
-          dataPoint =>
+          at_a =>
             (
-              dataPoint
+              at_a
                 .dim_n
               *
               height_n
@@ -510,13 +527,15 @@ const TREE_o
             totalValue_n
         )
   
-    squarify__v
-    (
-      dataScaled_a
-    , []
-    , getMin__o()
-        .dim_n
-    )
+    TREE_o
+      .squarify__v
+      (
+        dataScaled_a
+      , []
+      , TREE_o
+          .min__o()
+            .dim_n
+      )
 
     return (
       TREE_o
@@ -524,32 +543,36 @@ const TREE_o
           .data_a
             .map
             (
-              dataPoint =>
+              at_a =>
               (
                 {
-                  ...dataPoint
+                  ...at_a
                   , x_n:
-                      roundValue__n
+                      TREE_o
+                        .round__n
                       (
-                        dataPoint
+                        at_a
                           .x_n
                       )
                   , y_n:
-                      roundValue__n
+                      TREE_o
+                        .round__n
                       (
-                        dataPoint
+                        at_a
                           .y_n
                       )
                   , width_n:
-                      roundValue__n
+                      TREE_o
+                        .round__n
                       (
-                        dataPoint
+                        at_a
                           .width_n
                       )
                   , height_n:
-                      roundValue__n
+                      TREE_o
+                        .round__n
                       (
-                        dataPoint
+                        at_a
                           .height_n
                       )
                 }
@@ -558,3 +581,19 @@ const TREE_o
     )
   }
 }
+
+
+
+;console
+  .log
+  (
+    TREE_o
+      .init__a
+      (
+        [
+          50, 80, 10, 60
+        ]
+      , 500
+      , 200
+      )
+  )
