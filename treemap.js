@@ -626,3 +626,59 @@ const TREE_o
       , 200
       )
   )
+
+
+  /*
+  [
+    {
+        "x_n": 0,
+        "y_n": 0,
+        "width_n": 125,
+        "height_n": 200,
+        "data_a": {
+            "dim_n": 100,
+            "hue": 1
+        }
+    },
+    {
+        "x_n": 125,
+        "y_n": 0,
+        "width_n": 112.5,
+        "height_n": 200,
+        "data_a": {
+            "dim_n": 90,
+            "hue": 2
+        }
+    },
+    {
+        "x_n": 237.5,
+        "y_n": 0,
+        "width_n": 100,
+        "height_n": 200,
+        "data_a": {
+            "dim_n": 80,
+            "hue": 3
+        }
+    },
+    {
+        "x_n": 337.5,
+        "y_n": 0,
+        "width_n": 162.5,
+        "height_n": 107.69,
+        "data_a": {
+            "dim_n": 70,
+            "hue": 4
+        }
+    },
+    {
+        "x_n": 337.5,
+        "y_n": 107.69,
+        "width_n": 162.5,
+        "height_n": 92.31,
+        "data_a": {
+            "dim_n": 60,
+            "hue": 5
+        }
+    }
+]
+  */
