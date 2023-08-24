@@ -1,20 +1,10 @@
 const TREE_o
 =
 {
-  rectangle_o:
-  {
-    data_a:
-      []
-  , xStart_n:
-      0
-  , yStart_n:
-      0
-  , totalWidth_n:
-      0    //: width_n
-  , totalHeight_n:
-      0    //: height_n
-  }
-, initialData_a:
+  frame_o:    //: container
+    null
+    
+, data_a:     //: initial data         [ { dim_n: number, hue: number }, ... ]
     null
 
 
@@ -142,13 +132,13 @@ const TREE_o
     if
     (
       TREE_o
-        .rectangle_o
+        .frame_o
           .totalHeight_n
           **
           2
       >
       TREE_o
-        .rectangle_o
+        .frame_o
           .totalWidth_n
           **
           2
@@ -158,7 +148,7 @@ const TREE_o
         {
           dim_n:
             TREE_o
-              .rectangle_o
+              .frame_o
                 .totalWidth_n
         , vertical_b:
             false
@@ -170,7 +160,7 @@ const TREE_o
       {
         dim_n:
           TREE_o
-            .rectangle_o
+            .frame_o
               .totalHeight_n
       , vertical_b:
           true
@@ -199,99 +189,100 @@ const TREE_o
       /
       width_n
 
-    row_a
-      .forEach
+    for
+    (
+      let at_n
+      of
+      row_a
+    )
+    {
+      const rowWidth_n
+      =
+        at_n
+        /
+        rowHeight_n
+
+      const { xStart_n }
+      =
+        TREE_o
+          .frame_o
+
+      const { yStart_n }
+      =
+        TREE_o
+          .frame_o
+  
+      let data_a
+
+      if
       (
-        at_n =>
-        {
-          const rowWidth_n
-          =
-            at_n
-            /
-            rowHeight_n
-
-          const { xStart_n }
-          =
-            TREE_o
-              .rectangle_o
-
-          const { yStart_n }
-          =
-            TREE_o
-              .rectangle_o
-    
-          let data_a
-
-          if
-          (
-            vertical_b
-          )
-          {
-            data_a
-            =
-              {
-                x_n:
-                  xStart_n
-              , y_n:
-                  yStart_n
-              , width_n:
-                  rowHeight_n
-              , height_n:
-                  rowWidth_n
-              , data_a:
-                  TREE_o
-                    .initialData_a
-                    [
-                      TREE_o
-                        .rectangle_o
-                          .data_a
-                            .length
-                    ]
-              }
-
-            TREE_o
-              .rectangle_o
-                .yStart_n
-            +=
-              rowWidth_n
-          }
-          else
-          {
-            data_a
-            =
-              {
-                x_n:
-                  xStart_n
-              , y_n:
-                  yStart_n
-              , width_n:
-                  rowWidth_n
-              , height_n:
-                  rowHeight_n
-              , data_a:
-                  TREE_o
-                    .initialData_a
-                    [
-                      TREE_o
-                        .rectangle_o
-                          .data_a
-                            .length
-                    ]
-              }
-
-            TREE_o
-              .rectangle_o
-                .xStart_n
-            +=
-              rowWidth_n
-          }
-    
-          TREE_o
-            .rectangle_o
-              .data_a
-                .push( data_a )
-        }
+        vertical_b
       )
+      {
+        data_a
+        =
+          {
+            x_n:
+              xStart_n
+          , y_n:
+              yStart_n
+          , width_n:
+              rowHeight_n
+          , height_n:
+              rowWidth_n
+          , data_a:
+              TREE_o
+                .data_a
+                [
+                  TREE_o
+                    .frame_o
+                      .data_a
+                        .length
+                ]
+          }
+
+        TREE_o
+          .frame_o
+            .yStart_n
+        +=
+          rowWidth_n
+      }
+      else
+      {
+        data_a
+        =
+          {
+            x_n:
+              xStart_n
+          , y_n:
+              yStart_n
+          , width_n:
+              rowWidth_n
+          , height_n:
+              rowHeight_n
+          , data_a:
+              TREE_o
+                .data_a
+                [
+                  TREE_o
+                    .frame_o
+                      .data_a
+                        .length
+                ]
+          }
+
+        TREE_o
+          .frame_o
+            .xStart_n
+        +=
+          rowWidth_n
+      }
+  
+      TREE_o
+        .frame_o
+          .data_a
+            .push( data_a )
+    }
 
     if
     (
@@ -299,19 +290,19 @@ const TREE_o
     )
     {
       TREE_o
-        .rectangle_o
+        .frame_o
           .xStart_n
       +=
         rowHeight_n
 
       TREE_o
-        .rectangle_o
+        .frame_o
           .yStart_n
       -=
         width_n
 
       TREE_o
-        .rectangle_o
+        .frame_o
           .totalWidth_n
       -=
         rowHeight_n
@@ -319,19 +310,19 @@ const TREE_o
     else
     {
       TREE_o
-        .rectangle_o
+        .frame_o
           .xStart_n
       -=
         width_n
 
       TREE_o
-        .rectangle_o
+        .frame_o
           .yStart_n
       +=
         rowHeight_n
 
       TREE_o
-        .rectangle_o
+        .frame_o
           .totalHeight_n
       -=
         rowHeight_n
@@ -473,7 +464,7 @@ const TREE_o
   )
   {
     TREE_o
-      .rectangle_o
+      .frame_o
     =
     {
       data_a:
@@ -489,7 +480,7 @@ const TREE_o
     }
 
     TREE_o
-      .initialData_a
+      .data_a
     =
       data_a
 
@@ -539,7 +530,7 @@ const TREE_o
 
     return (
       TREE_o
-        .rectangle_o
+        .frame_o
           .data_a
             .map
             (
