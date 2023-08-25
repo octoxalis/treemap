@@ -189,6 +189,10 @@ const TREE_o
       /
       width_n
 
+  
+    let atWidth_n
+    let atHeight_n
+
     for
     (
       let at_n
@@ -211,35 +215,19 @@ const TREE_o
       =
         TREE_o
           .frame_o
-  
-      let data_a
 
       if
       (
         vertical_b
       )
       {
-        data_a
+        atWidth_n
         =
-          {
-            x_n:
-              xStart_n
-          , y_n:
-              yStart_n
-          , width_n:
-              rowHeight_n
-          , height_n:
-              rowWidth_n
-          , data_a:
-              TREE_o
-                .data_a
-                [
-                  TREE_o
-                    .frame_o
-                      .data_a
-                        .length
-                ]
-          }
+          rowHeight_n
+
+        atHeight_n
+        =
+          rowWidth_n
 
         TREE_o
           .frame_o
@@ -249,27 +237,13 @@ const TREE_o
       }
       else
       {
-        data_a
+        atWidth_n
         =
-          {
-            x_n:
-              xStart_n
-          , y_n:
-              yStart_n
-          , width_n:
-              rowWidth_n
-          , height_n:
-              rowHeight_n
-          , data_a:
-              TREE_o
-                .data_a
-                [
-                  TREE_o
-                    .frame_o
-                      .data_a
-                        .length
-                ]
-          }
+          rowWidth_n
+
+        atHeight_n
+        =
+          rowHeight_n
 
         TREE_o
           .frame_o
@@ -281,7 +255,28 @@ const TREE_o
       TREE_o
         .frame_o
           .data_a
-            .push( data_a )
+            .push
+            (
+              {
+                x_n:
+                  xStart_n
+              , y_n:
+                  yStart_n
+              , width_n:
+                  atWidth_n
+              , height_n:
+                  atHeight_n
+              , data_a:
+                  TREE_o
+                    .data_a
+                    [
+                      TREE_o
+                        .frame_o
+                          .data_a
+                            .length
+                    ]
+              }
+            )
     }
 
     if
